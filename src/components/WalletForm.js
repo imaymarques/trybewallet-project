@@ -31,7 +31,7 @@ class WalletForm extends Component {
     const fetchAPI = await fetch('https://economia.awesomeapi.com.br/json/all');
     const API = await fetchAPI.json();
     const amountDescripton = {
-      id: expenses.length,
+      id: expenses.length, // se quebrar é por causa do length
       method: payment,
       tag: category,
       value: amount,
