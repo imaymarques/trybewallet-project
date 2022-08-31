@@ -24,6 +24,10 @@ class WalletForm extends Component {
     this.setState({ [name]: value });
   };
 
+  // handleClick = () => {
+
+  // }
+
   render() {
     const { currencies } = this.props;
     const { payment, category, amount, description } = this.state;
@@ -85,6 +89,7 @@ class WalletForm extends Component {
             onChange={ this.inputChange }
           />
         </label>
+        <button type="button" onClick={ this.handleClick }>Adicionar Despesas</button>
       </div>
     );
   }

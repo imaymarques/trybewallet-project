@@ -5,7 +5,7 @@ export const WALLET_COINS = 'WALLET_COINS';
 
 export const emailInput = (email) => ({
   type: EMAIL_INPUT,
-  payload: email,
+  email,
 });
 
 export const walletCoins = (coins) => ({ type: WALLET_COINS, payload: coins });
