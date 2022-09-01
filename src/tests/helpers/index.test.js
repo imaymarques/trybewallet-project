@@ -8,26 +8,21 @@ import Table from '../../components/Table';
 import mockData from './mockData';
 
 describe('Verifica se os testes estão cobrindo o componente Login', () => {
-  it('Verifica se o component App está sendo renderizado na tela e tem a rota /', () => {
-    const { history } = renderWithRouterAndRedux(<App />);
-    expect(App).toBeInTheDocument();
-    expect(history.location.pathname).toBe('/');
-  });
-
   it('Verifica se tem um input email na tela inicial', () => {
     renderWithRouterAndRedux(<App />);
-    const email = screen.getByLabelText(/email/i);
+    const email = screen.getByPlaceholderText('Email');
     expect(email).toBeInTheDocument();
   });
 
   it('Verifica se tem um input senha na tela inicial', () => {
     renderWithRouterAndRedux(<App />);
-    const password = screen.getByLabelText(/password/i);
+    const password = screen.getByPlaceholderText('Senha');
     expect(password).toBeInTheDocument();
   });
 
   it('Verifica se tem um botão de entrar na tela', () => {
-    const button = screen.getByRole('button', { name: /Entrar/i });
+    renderWithRouterAndRedux(<App />);
+    const button = screen.getByRole('button', { name: 'Entrar' });
     expect(button).toBeInTheDocument();
   });
 
@@ -40,8 +35,9 @@ describe('Verifica se os testes estão cobrindo o componente Login', () => {
 
   it('Verifica se o botão está habilitado se email e senha estiverem válidos', () => {
     renderWithRouterAndRedux(<App />);
-    const email = screen.getByLabelText(/email/i);
-    const password = screen.getByLabelText(/password/i);
+    const button = screen.getByRole('button', { name: /Entrar/i });
+    const email = screen.getByPlaceholderText('Email');
+    const password = screen.getByPlaceholderText('Senha');
     const emailTest = 'teste@gmail.com';
     const passwordTest = '123456';
     userEvent.type(email, emailTest);
@@ -52,8 +48,8 @@ describe('Verifica se os testes estão cobrindo o componente Login', () => {
   it('Verifica se ao clicar no botão, vai para a rota carteira', () => {
     const { history } = renderWithRouterAndRedux(<App />);
     const loginButton = screen.getByRole('button', { name: /Entrar/i });
-    const email = screen.getByLabelText(/email/i);
-    const password = screen.getByLabelText(/password/i);
+    const email = screen.getByTestId('email-input');
+    const password = screen.getByTestId('password-input');
     userEvent.type(email, 'imaymarques@gmail.com');
     userEvent.type(password, '123456');
     userEvent.click(loginButton);
@@ -103,10 +99,6 @@ describe('Verifica se os testes estão cobrindo o componente Wallet', () => {
     expect(global.fetch).toHaveBeenCalledWith('https://economia.awesomeapi.com.br/json/all');
   });
 
-  it('Verifica se possui o título Trybewallet na tela', () => {
-    const title = screen.getByRole('heading', { name: /TrybeWallet/i });
-    expect(title).toBeInTheDocument();
-  });
   it('Verifica se possui a caixa de digitar Description', () => {
     const description = screen.getByTestId('description-input');
     expect(description).toBeInTheDocument();
@@ -126,16 +118,6 @@ describe('Verifica se os testes estão cobrindo o componente Wallet', () => {
   it('Verifica se a Categoria está sendo renderizada', () => {
     const category = screen.getByTestId('tag-input');
     expect(category).toBeInTheDocument();
-  });
-  it('Verifica se ao clicar no botão excluir, o valor zera', () => {
-    const sum = screen.getByText(/despesa total:/i);
-    const deleteBtn = screen.getByTestId('delete-btn');
-    expect(deleteBtn).toBeInTheDocument();
-
-    userEvent.click(deleteBtn);
-
-    expect(deleteBtn).not.toBeInTheDocument();
-    expect(sum).toHaveTextContent('0.00');
   });
 });
 
