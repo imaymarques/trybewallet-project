@@ -1,5 +1,6 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-import { WALLET_COINS, API_EXPENSE, DELETE_BUTTON, EDIT_BUTTON } from '../actions';
+import { WALLET_COINS, API_EXPENSE, DELETE_BUTTON,
+  EDIT_BUTTON, EDIT_FIELD } from '../actions';
 
 const INIT_STATE = {
   currencies: [], // array de string
@@ -9,7 +10,6 @@ const INIT_STATE = {
 };
 
 function walletReducer(state = INIT_STATE, action) {
-  console.log(action);
   switch (action.type) {
   case WALLET_COINS:
     return {
@@ -29,7 +29,15 @@ function walletReducer(state = INIT_STATE, action) {
   case EDIT_BUTTON:
     return {
       ...state,
-      expenses: action.payload,
+      editor: true,
+      idToEdit: action.id,
+    };
+  case EDIT_FIELD:
+    return {
+      ...state,
+      expenses: state.expenses.map((el) => (el.id === state.idToEdit
+        ? ({ ...el, ...action.payload }) : ({ ...el }))),
+      editor: false,
     };
   default:
     return state;

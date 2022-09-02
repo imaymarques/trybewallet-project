@@ -5,6 +5,7 @@ export const WALLET_COINS = 'WALLET_COINS';
 export const API_EXPENSE = 'API_EXPENSE';
 export const DELETE_BUTTON = 'DELETE_BUTTON';
 export const EDIT_BUTTON = 'EDIT_BUTTON';
+export const EDIT_FIELD = 'EDIT_FIELD';
 
 export const emailInput = (email) => ({
   type: EMAIL_INPUT,
@@ -30,4 +31,9 @@ export const deleteButton = (id) => ({
 export const editButton = (id) => ({
   type: EDIT_BUTTON,
   id,
+});
+
+export const editField = (payload) => ({
+  type: EDIT_FIELD,
+  payload,
 });

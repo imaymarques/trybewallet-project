@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCurrencies, response } from '../redux/actions';
+import { getCurrencies, response, editField } from '../redux/actions';
+
+const food = 'Alimentação';
 
 class WalletForm extends Component {
   constructor() {
@@ -9,7 +11,7 @@ class WalletForm extends Component {
 
     this.state = {
       payment: 'Dinheiro',
-      category: 'Alimentação',
+      category: food,
       amount: '',
       description: '',
       coins: 'USD',
@@ -27,7 +29,7 @@ class WalletForm extends Component {
 
   handleClick = async () => {
     const { payment, category, amount, description, coins } = this.state;
-    const { dispatch, expenses } = this.props;
+    const { dispatch, expenses, editor } = this.props;
     const fetchAPI = await fetch('https://economia.awesomeapi.com.br/json/all');
     const API = await fetchAPI.json();
     const amountDescripton = {
@@ -39,18 +41,37 @@ class WalletForm extends Component {
       currency: coins,
       exchangeRates: API,
     };
-    dispatch(response(amountDescripton));
-    this.setState({
-      payment: 'Dinheiro',
-      category: 'Alimentação',
-      amount: '',
-      description: '',
-      coins: 'USD',
-    });
+    if (!editor) {
+      dispatch(response(amountDescripton));
+      this.setState({
+        payment: 'Dinheiro',
+        category: food,
+        amount: '',
+        description: '',
+        coins: 'USD',
+      });
+    }
+    if (editor) {
+      dispatch(editField({
+        method: payment,
+        tag: category,
+        value: amount,
+        description,
+        currency: coins,
+        exchangeRates: API,
+      }));
+      this.setState({
+        payment: 'Dinheiro',
+        category: food,
+        amount: '',
+        description: '',
+        coins: 'USD',
+      });
+    }
   };
 
   render() {
-    const { currencies } = this.props;
+    const { currencies, editor } = this.props;
     const { payment, category, amount, description, coins } = this.state;
     return (
       <div className="WalletForm">
@@ -115,13 +136,19 @@ class WalletForm extends Component {
             onChange={ this.inputChange }
           />
         </label>
-        <button type="button" onClick={ this.handleClick }>Adicionar Despesas</button>
+        <button
+          type="button"
+          onClick={ this.handleClick }
+        >
+          { editor ? 'Editar despesa' : 'Adicionar despesa' }
+        </button>
       </div>
     );
   }
 }
 
 WalletForm.propTypes = {
+  editor: PropTypes.bool.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   dispatch: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.shape({
@@ -132,6 +159,7 @@ WalletForm.propTypes = {
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
   expenses: state.wallet.expenses,
+  editor: state.wallet.editor,
 });
 
 export default connect(mapStateToProps)(WalletForm);

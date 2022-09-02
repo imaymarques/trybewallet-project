@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { deleteButton } from '../redux/actions';
+import { deleteButton, editButton } from '../redux/actions';
 
 class Table extends Component {
   removeButton = (id) => {
     const { dispatch } = this.props;
     dispatch(deleteButton(id));
+  };
+
+  editButton = (id) => {
+    const { dispatch } = this.props;
+    dispatch(editButton(id));
   };
 
   render() {
@@ -35,16 +40,11 @@ class Table extends Component {
                 <td>{el.tag}</td>
                 <td>{el.method}</td>
                 <td>
-                  {
-                    el.value === '' ? '0.00' : Number(el.value).toFixed(2)
-                  }
+                  { el.value === '' ? '0.00' : Number(el.value).toFixed(2) }
                 </td>
                 <td>{el.exchangeRates[el.currency].name}</td>
                 <td>
-                  {
-                    Number(el.exchangeRates[el.currency].ask).toFixed(2)
-                  }
-
+                  { Number(el.exchangeRates[el.currency].ask).toFixed(2) }
                 </td>
                 <td>
                   {Number(el.exchangeRates[el.currency]
@@ -54,18 +54,18 @@ class Table extends Component {
                 <td>
                   <button
                     type="button"
-                    data-testid="edit-btn"
-                    onClick={ () => this.edit(el.id) }
+                    onClick={ () => this.removeButton(el.id) }
+                    data-testid="delete-btn"
                   >
-                    Editar
+                    Delete
 
                   </button>
                   <button
                     type="button"
-                    onClick={ () => this.removeButton(el.id) }
-                    data-testid="delete-btn"
+                    data-testid="edit-btn"
+                    onClick={ () => this.editButton(el.id) }
                   >
-                    Excluir
+                    Edit
 
                   </button>
                 </td>
