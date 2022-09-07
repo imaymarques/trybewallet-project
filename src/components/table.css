@@ -1,0 +1,35 @@
+.table-names {
+  border: 3px black solid;
+}
+
+.des, .tag-el {
+  padding: 5px;
+}
+
+.val, .value, .currency-value, .reals {
+  padding-left: 30px;
+}
+
+.cam, .conv, .coin-conv {
+  padding-right: 20px;
+}
+
+.description {
+  padding-left: 10px;
+}
+
+.method, .currency-name {
+  padding-left: 50px;
+}
+
+.cambio {
+  padding-left: 40px;
+}
+
+.buttons {
+  display: flex;
+}
+
+.bttn-edit, .bttn-delete {
+  border-radius: 5px;
+}

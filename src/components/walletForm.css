@@ -1,0 +1,19 @@
+.WalletForm {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-left: black 3px solid;
+  border-right: black 3px solid;
+  padding: 10px;
+}
+
+.value-input, .coin-input, .payment-input, .category-input, .description-input {
+  border-radius: 5px;
+  border: black 2px solid;
+  margin-left: 5px;
+}
+
+.add-input {
+  border-radius: 5px;
+  padding: 5px;
+}

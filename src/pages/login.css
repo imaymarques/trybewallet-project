@@ -1,0 +1,61 @@
+button:enabled {
+  background-color: green;
+  color: aliceblue;
+}
+
+button:disabled {
+  background-color: grey;
+  color: aliceblue;
+}
+
+body {
+  background-image: url('https://img.myloview.com.br/quadros/financial-icon-set-seamless-background-dollar-currency-money-signs-backdrop-for-financial-website-or-economical-theme-ads-and-information-vector-wallpaper-or-web-site-background-400-165854848.jpg');
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.login-page {
+  position: absolute;
+  width: 525px;
+  height: 356px;
+  left: 377px;
+  top: 201px;
+  box-shadow: -4px 9px 13px rgba(3, 107, 82, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: black 1px solid;
+  border-radius: 5px;
+  background-color: antiquewhite;
+}
+
+.wallet-img {
+  width: 100px;
+  align-items: center;
+}
+
+.login-elements {
+  display: flex;
+  justify-content: center;
+  padding: 25px;
+}
+
+.email-input {
+  border-radius: 5px;
+  width: 350px;
+  padding: 5px;
+}
+
+.password-input {
+  border-radius: 5px;
+  width: 350px;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.login-button {
+  padding: 5px;
+  margin-top: 10px;
+  width: 365px;
+  border-radius: 5px;
+}

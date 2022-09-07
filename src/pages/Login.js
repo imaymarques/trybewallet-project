@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { emailInput } from '../redux/actions/index';
+import './login.css';
 
 class Login extends React.Component {
   constructor() {
@@ -43,10 +44,26 @@ class Login extends React.Component {
   render() {
     const { email, password } = this.state;
     return (
-      <div className="login-page">
-        <label htmlFor="email">
-          Email
+      <div
+        className="login-page"
+      >
+        <div className="login-elements">
+          <img
+            src="https://www.clipartmax.com/png/full/212-2120379_coin-wallet-icon-icon-wallet-png.png"
+            alt="wallet"
+            className="wallet-img"
+          />
+          <h1>
+            Trybe
+            Wallet
+          </h1>
+        </div>
+        <label
+          htmlFor="email"
+          className="email-label"
+        >
           <input
+            className="email-input"
             type="email"
             placeholder="Email"
             data-testid="email-input"
@@ -55,9 +72,11 @@ class Login extends React.Component {
             name="email"
           />
         </label>
-        <label htmlFor="password">
-          Senha
+        <label
+          htmlFor="password"
+        >
           <input
+            className="password-input"
             type="password"
             placeholder="Senha"
             data-testid="password-input"
@@ -67,6 +86,7 @@ class Login extends React.Component {
           />
         </label>
         <button
+          className="login-button"
           type="button"
           disabled={ !this.handleBttnInputs() }
           onClick={ this.handleBttn }

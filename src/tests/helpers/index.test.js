@@ -160,4 +160,17 @@ describe('Veririca se os testes estão cobrindo o componente Table', () => {
     expect(screen.queryByText('Dinheiro')).not.toBeInTheDocument();
     expect(screen.queryByText('Dólar Americano/Real Brasileiro')).not.toBeInTheDocument();
   });
+  it('Verifica se deleta as despesas ao clicar no botão', () => {
+    renderWithRouterAndRedux(<Header />);
+    const displaySum = screen.getByTestId('total-field');
+    expect(displaySum).toHaveTextContent('100.00');
+
+    const deleteBtn = screen.getByRole('button', { name: /Excluir/i });
+    expect(deleteBtn).toBeInTheDocument();
+
+    userEvent.click(deleteBtn);
+
+    expect(deleteBtn).not.toBeInTheDocument();
+    expect(displaySum).toHaveTextContent('0.00');
+  });
 });

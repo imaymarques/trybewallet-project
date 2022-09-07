@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrencies, response, editField } from '../redux/actions';
+import './walletForm.css';
 
 const food = 'Alimentação';
 
@@ -78,6 +79,7 @@ class WalletForm extends Component {
         <label htmlFor="value-input">
           Valor:
           <input
+            className="value-input"
             data-testid="value-input"
             type="number"
             name="amount"
@@ -88,6 +90,7 @@ class WalletForm extends Component {
         <label htmlFor="currency">
           Moeda:
           <select
+            className="coin-input"
             data-testid="currency-input"
             name="coins"
             onChange={ this.inputChange }
@@ -101,6 +104,7 @@ class WalletForm extends Component {
         <label htmlFor="payment">
           Método de pagamento:
           <select
+            className="payment-input"
             data-testid="method-input"
             name="payment"
             value={ payment }
@@ -114,6 +118,7 @@ class WalletForm extends Component {
         <label htmlFor="category">
           Categoria:
           <select
+            className="category-input"
             data-testid="tag-input"
             name="category"
             value={ category }
@@ -129,6 +134,7 @@ class WalletForm extends Component {
         <label htmlFor="description">
           Descrição:
           <input
+            className="description-input"
             data-testid="description-input"
             type="text"
             name="description"
@@ -137,6 +143,7 @@ class WalletForm extends Component {
           />
         </label>
         <button
+          className="add-input"
           type="button"
           onClick={ this.handleClick }
         >

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { deleteButton, editButton } from '../redux/actions';
+import './table.css';
 
 class Table extends Component {
   removeButton = (id) => {
@@ -18,54 +19,55 @@ class Table extends Component {
     const { expenses } = this.props;
     console.log(expenses);
     return (
-      <div>
-        Table
+      <div className="table-names">
         <table>
           <thead>
-            <th>Descrição</th>
-            <th>Tag</th>
-            <th>Método de pagamento</th>
-            <th>Valor</th>
-            <th>Moeda</th>
-            <th>Câmbio utilizado</th>
-            <th>Valor convertido</th>
-            <th>Moeda de conversão</th>
-            <th>Editar/Excluir</th>
+            <th className="des">Descrição</th>
+            <th className="tag-el">Tag</th>
+            <th className="met">Método de pagamento</th>
+            <th className="val">Valor</th>
+            <th className="coin-el">Moeda</th>
+            <th className="cam">Câmbio utilizado</th>
+            <th className="conv">Valor convertido</th>
+            <th className="coin-conv">Moeda de conversão</th>
+            <th className="ed-ex">Editar/Excluir</th>
           </thead>
-          <tbody>
+          <tbody className="table">
             {expenses.map((el) => (
 
               <tr key={ el.id }>
-                <td>{el.description}</td>
-                <td>{el.tag}</td>
-                <td>{el.method}</td>
-                <td>
+                <td className="description">{el.description}</td>
+                <td className="tag">{el.tag}</td>
+                <td className="method">{el.method}</td>
+                <td className="value">
                   { el.value === '' ? '0.00' : Number(el.value).toFixed(2) }
                 </td>
-                <td>{el.exchangeRates[el.currency].name}</td>
-                <td>
+                <td className="currency-name">{el.exchangeRates[el.currency].name}</td>
+                <td className="cambio">
                   { Number(el.exchangeRates[el.currency].ask).toFixed(2) }
                 </td>
-                <td>
+                <td className="currency-value">
                   {Number(el.exchangeRates[el.currency]
                     .ask * el.value).toFixed(2)}
                 </td>
-                <td>Real brasileiro</td>
-                <td>
+                <td className="reals">Real brasileiro</td>
+                <td className="buttons">
                   <button
-                    type="button"
-                    onClick={ () => this.removeButton(el.id) }
-                    data-testid="delete-btn"
-                  >
-                    Delete
-
-                  </button>
-                  <button
+                    className="bttn-edit"
                     type="button"
                     data-testid="edit-btn"
                     onClick={ () => this.editButton(el.id) }
                   >
-                    Edit
+                    Editar
+
+                  </button>
+                  <button
+                    className="bttn-delete"
+                    type="button"
+                    onClick={ () => this.removeButton(el.id) }
+                    data-testid="delete-btn"
+                  >
+                    Excluir
 
                   </button>
                 </td>
